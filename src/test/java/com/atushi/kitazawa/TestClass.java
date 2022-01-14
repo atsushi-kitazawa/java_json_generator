@@ -2,6 +2,7 @@ package com.atushi.kitazawa;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class TestClass {
     // primitive type
@@ -11,11 +12,14 @@ public class TestClass {
     private String s;
     private Integer intObject;
     private Long longObject;
+    private Double doubleObject;
 
     // Collection
     private List<String> strList;
     private List<Integer> intList;
     private Map<Integer, String> map;
+    private Set<Integer> intSet;
+    private Set<String> strSet;
 
     public int getI() {
         return i;
@@ -71,6 +75,30 @@ public class TestClass {
 
     public void setMap(Map<Integer, String> map) {
         this.map = map;
+    }
+
+    public Set<Integer> getIntSet() {
+        return intSet;
+    }
+
+    public void setIntSet(Set<Integer> intSet) {
+        this.intSet = intSet;
+    }
+
+    public Set<String> getStrSet() {
+        return strSet;
+    }
+
+    public void setStrSet(Set<String> strSet) {
+        this.strSet = strSet;
+    }
+
+    public Double getDoubleObject() {
+        return doubleObject;
+    }
+
+    public void setDoubleObject(Double doubleObject) {
+        this.doubleObject = doubleObject;
     }
 
 }
