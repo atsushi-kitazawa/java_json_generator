@@ -25,7 +25,7 @@ public class MainTest
         assertEquals(Long.valueOf(100l), instance.getLongObject());
         assertEquals(Arrays.asList("aaa", "aaa", "aaa"), instance.getStrList());
         assertEquals(Arrays.asList(10, 10, 10), instance.getIntList());
-        assertEquals(Map.of(1, "value1", 2, "value2"), instance.getMap());
+        assertEquals(Map.of(10, "aaa"), instance.getMap());
         assertEquals(new HashSet<>(Arrays.asList(10, 10, 10)), instance.getIntSet());
         assertEquals(new HashSet<>(Arrays.asList("aaa", "aaa", "aaa")), instance.getStrSet());
         assertEquals(new TestNestClass("aaa"), instance.getNestClass());

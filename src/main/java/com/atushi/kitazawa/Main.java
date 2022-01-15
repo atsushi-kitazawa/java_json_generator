@@ -56,10 +56,16 @@ public class Main {
                             System.err.println("failed to set " + f.getName());
                         }
                         break;
-                    case "java.util.Map":
+                    case "java.util.Map": // TODO
+                        String paramTypeKey = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]
+                                .getTypeName();
+                        String paramTypeVal = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[1]
+                                .getTypeName();
                         f.setAccessible(true);
                         try {
-                            f.set(instance, Map.of(1, "value1", 2, "value2"));
+                            Object key = typeToValue.get(paramTypeKey);
+                            Object value = typeToValue.get(paramTypeVal);
+                            f.set(instance, Map.of(key, value));
                         } catch (IllegalAccessException e) {
                             System.err.println("failed to set " + f.getName());
                         }
