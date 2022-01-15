@@ -2,6 +2,7 @@ package com.atushi.kitazawa;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,38 +34,31 @@ public class Main {
         for (Field f : fields) {
             String type = f.getType().getName();
             if (isCollection(type)) {
+                Type[] paramType = ((ParameterizedType) f.getGenericType()).getActualTypeArguments();
                 switch (type) {
                     case "java.util.List":
-                        String paramType = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]
-                                .getTypeName();
                         f.setAccessible(true);
                         try {
-                            Object value = typeToValue.get(paramType);
+                            Object value = typeToValue.get(paramType[0].getTypeName());
                             f.set(instance, Arrays.asList(value, value, value));
                         } catch (IllegalAccessException e) {
                             System.err.println("failed to set " + f.getName());
                         }
                         break;
                     case "java.util.Set":
-                        String paramType1 = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]
-                                .getTypeName();
                         f.setAccessible(true);
                         try {
-                            Object value = typeToValue.get(paramType1);
+                            Object value = typeToValue.get(paramType[0].getTypeName());
                             f.set(instance, new HashSet<>(Arrays.asList(value, value, value)));
                         } catch (IllegalAccessException e) {
                             System.err.println("failed to set " + f.getName());
                         }
                         break;
-                    case "java.util.Map": // TODO
-                        String paramTypeKey = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]
-                                .getTypeName();
-                        String paramTypeVal = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[1]
-                                .getTypeName();
+                    case "java.util.Map":
                         f.setAccessible(true);
                         try {
-                            Object key = typeToValue.get(paramTypeKey);
-                            Object value = typeToValue.get(paramTypeVal);
+                            Object key = typeToValue.get(paramType[0].getTypeName());
+                            Object value = typeToValue.get(paramType[1].getTypeName());
                             f.set(instance, Map.of(key, value));
                         } catch (IllegalAccessException e) {
                             System.err.println("failed to set " + f.getName());
