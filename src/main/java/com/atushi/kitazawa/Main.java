@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,11 +19,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        doMain();
+        doMain("JSON");
     }
 
-    private static void doMain() {
-        System.out.println("call doMain");
+    private static void doMain(String format) {
+        A instance = new A();
+        setValueToMember(instance);
+        Marshaller m = MarshallerFactory.getMarshaller(format);
+        System.out.println(m.marshal(instance));
     }
 
     public static <T> void setValueToMember(T instance) {
