@@ -25,7 +25,8 @@ public class TestClass {
     private TestNestClass nestClass;
 
     // Collection int Custom class
-    // private List<TestNestClass> nestClassList;
+    private List<TestNestClass> nestClassList;
+    private Set<TestNestClass> nestClassSet;
 
     public int getI() {
         return i;
@@ -115,12 +116,20 @@ public class TestClass {
         this.nestClass = nestClass;
     }
 
-    // public List<TestNestClass> getNestClassList() {
-    // return nestClassList;
-    // }
+    public List<TestNestClass> getNestClassList() {
+        return nestClassList;
+    }
 
-    // public void setNestClassList(List<TestNestClass> nestClassList) {
-    // this.nestClassList = nestClassList;
-    // }
+    public void setNestClassList(List<TestNestClass> nestClassList) {
+        this.nestClassList = nestClassList;
+    }
+
+    public Set<TestNestClass> getNestClassSet() {
+        return nestClassSet;
+    }
+
+    public void setNestClassSet(Set<TestNestClass> nestClassSet) {
+        this.nestClassSet = nestClassSet;
+    }
 
 }

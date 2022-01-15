@@ -29,5 +29,11 @@ public class MainTest
         assertEquals(new HashSet<>(Arrays.asList(10, 10, 10)), instance.getIntSet());
         assertEquals(new HashSet<>(Arrays.asList("aaa", "aaa", "aaa")), instance.getStrSet());
         assertEquals(new TestNestClass("aaa"), instance.getNestClass());
+        assertEquals(Arrays.asList(new TestNestClass("aaa"), new TestNestClass("aaa"), new TestNestClass("aaa")),
+                instance.getNestClassList());
+        assertEquals(
+                new HashSet<>(
+                        Arrays.asList(new TestNestClass("aaa"), new TestNestClass("aaa"), new TestNestClass("aaa"))),
+                instance.getNestClassSet());
     }
 }

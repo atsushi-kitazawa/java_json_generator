@@ -37,21 +37,48 @@ public class Main {
                 Type[] paramType = ((ParameterizedType) f.getGenericType()).getActualTypeArguments();
                 switch (type) {
                     case "java.util.List":
-                        f.setAccessible(true);
-                        try {
-                            Object value = typeToValue.get(paramType[0].getTypeName());
-                            f.set(instance, Arrays.asList(value, value, value));
-                        } catch (IllegalAccessException e) {
-                            System.err.println("failed to set " + f.getName());
+                        if (typeToValue.keySet().contains(paramType[0].getTypeName())) {
+                            f.setAccessible(true);
+                            try {
+                                Object value = typeToValue.get(paramType[0].getTypeName());
+                                f.set(instance, Arrays.asList(value, value, value));
+                            } catch (IllegalAccessException e) {
+                                System.err.println("failed to set " + f.getName());
+                            }
+                        } else {
+                            try {
+                                Object paramTypeInstance = Class.forName(paramType[0].getTypeName())
+                                        .getDeclaredConstructor()
+                                        .newInstance();
+                                setValueToMember(paramTypeInstance);
+                                f.setAccessible(true);
+                                f.set(instance, Arrays.asList(paramTypeInstance, paramTypeInstance, paramTypeInstance));
+                            } catch (Exception e) {
+                                System.err.println("not declared constructor. " + paramType[0].getClass().getName());
+                            }
                         }
                         break;
                     case "java.util.Set":
-                        f.setAccessible(true);
-                        try {
-                            Object value = typeToValue.get(paramType[0].getTypeName());
-                            f.set(instance, new HashSet<>(Arrays.asList(value, value, value)));
-                        } catch (IllegalAccessException e) {
-                            System.err.println("failed to set " + f.getName());
+                        if (typeToValue.keySet().contains(paramType[0].getTypeName())) {
+                            f.setAccessible(true);
+                            try {
+                                Object value = typeToValue.get(paramType[0].getTypeName());
+                                f.set(instance, new HashSet<>(Arrays.asList(value, value, value)));
+                            } catch (IllegalAccessException e) {
+                                System.err.println("failed to set " + f.getName());
+                            }
+                        } else {
+                            try {
+                                Object paramTypeInstance = Class.forName(paramType[0].getTypeName())
+                                        .getDeclaredConstructor()
+                                        .newInstance();
+                                setValueToMember(paramTypeInstance);
+                                f.setAccessible(true);
+                                f.set(instance, new HashSet<>(
+                                        Arrays.asList(paramTypeInstance, paramTypeInstance, paramTypeInstance)));
+                            } catch (Exception e) {
+                                System.err.println("not declared constructor. " + paramType[0].getClass().getName());
+                            }
                         }
                         break;
                     case "java.util.Map":
