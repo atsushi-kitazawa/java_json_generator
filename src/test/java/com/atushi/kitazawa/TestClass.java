@@ -21,6 +21,12 @@ public class TestClass {
     private Set<Integer> intSet;
     private Set<String> strSet;
 
+    // Nest Custom class
+    private TestNestClass nestClass;
+
+    // Collection int Custom class
+    // private List<TestNestClass> nestClassList;
+
     public int getI() {
         return i;
     }
@@ -100,5 +106,21 @@ public class TestClass {
     public void setDoubleObject(Double doubleObject) {
         this.doubleObject = doubleObject;
     }
+
+    public TestNestClass getNestClass() {
+        return nestClass;
+    }
+
+    public void setNestClass(TestNestClass nestClass) {
+        this.nestClass = nestClass;
+    }
+
+    // public List<TestNestClass> getNestClassList() {
+    // return nestClassList;
+    // }
+
+    // public void setNestClassList(List<TestNestClass> nestClassList) {
+    // this.nestClassList = nestClassList;
+    // }
 
 }

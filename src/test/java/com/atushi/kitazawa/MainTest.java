@@ -28,5 +28,6 @@ public class MainTest
         assertEquals(Map.of(1, "value1", 2, "value2"), instance.getMap());
         assertEquals(new HashSet<>(Arrays.asList(10, 10, 10)), instance.getIntSet());
         assertEquals(new HashSet<>(Arrays.asList("aaa", "aaa", "aaa")), instance.getStrSet());
+        assertEquals(new TestNestClass("aaa"), instance.getNestClass());
     }
 }

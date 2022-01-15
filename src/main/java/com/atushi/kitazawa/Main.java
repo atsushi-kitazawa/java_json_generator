@@ -78,7 +78,14 @@ public class Main {
                     System.err.println("failed to set " + f.getName());
                 }
             } else {
-                System.out.println("unsupported type. : " + f.getType().getName());
+                try {
+                    Object nestClassInstance = f.getType().getDeclaredConstructor().newInstance();
+                    setValueToMember(nestClassInstance);
+                    f.setAccessible(true);
+                    f.set(instance, nestClassInstance);
+                } catch (Exception e) {
+                    System.err.println("not declared constructor. " + type);
+                }
             }
         }
     }
