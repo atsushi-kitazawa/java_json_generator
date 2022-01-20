@@ -1,4 +1,4 @@
-package com.atushi.kitazawa;
+package com.atushi.kitazawa.test.clazz;
 
 import java.util.List;
 import java.util.Map;

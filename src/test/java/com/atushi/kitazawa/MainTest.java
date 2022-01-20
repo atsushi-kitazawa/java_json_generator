@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 
+import com.atushi.kitazawa.test.clazz.TestClass;
+import com.atushi.kitazawa.test.clazz.TestNestClass;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;

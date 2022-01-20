@@ -5,6 +5,8 @@ public class MarshallerFactory {
         switch (format) {
             case "JSON":
                 return new JsonMarshaller();
+            case "YAML":
+                return new YamlMarshaller();
             default:
                 throw new UnsupportedOperationException(String.format("%s format don't support.", format));
         }

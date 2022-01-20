@@ -1,4 +1,4 @@
-package com.atushi.kitazawa;
+package com.atushi.kitazawa.test.clazz;
 
 public class TestNestClass {
     private String subStr;
