@@ -23,7 +23,7 @@ public class Main {
     }
 
     private static void doMain(String format) {
-        A instance = new A();
+        A instance = (A) InstanceFactory.getInstance(A.class);
         setValueToMember(instance);
         Marshaller m = MarshallerFactory.getMarshaller(format);
         System.out.println(m.marshal(instance));
@@ -69,9 +69,8 @@ public class Main {
                             }
                         } else {
                             try {
-                                Object paramTypeInstance = Class.forName(paramType[0].getTypeName())
-                                        .getDeclaredConstructor()
-                                        .newInstance();
+                                Object paramTypeInstance = InstanceFactory
+                                        .getInstance(Class.forName(paramType[0].getTypeName()));
                                 setValueToMember(paramTypeInstance);
                                 f.setAccessible(true);
                                 f.set(instance, new HashSet<>(

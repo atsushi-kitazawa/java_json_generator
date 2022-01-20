@@ -9,7 +9,7 @@ import javassist.CtNewConstructor;
 import javassist.Loader;
 
 public class InstanceFactory {
-
+    
     public static Object getInstance(Class<?> clazz) {
         Object instance = null;
         try {
