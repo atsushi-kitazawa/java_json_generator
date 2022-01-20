@@ -4,22 +4,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import com.atushi.kitazawa.marshaller.Marshaller;
 import com.atushi.kitazawa.marshaller.MarshallerFactory;
 
 public class Main {
-
-    private static final Map<String, Object> typeToValue = new HashMap<>();
-    private static final Set<String> collectionType = new HashSet<>();
-
-    static {
-        init();
-    }
 
     public static void main(String[] args) {
         doMain(args[0]);
@@ -33,6 +24,7 @@ public class Main {
     }
 
     public static <T> void setValueToMember(T instance) {
+        Map<String, Object> typeToValue = TypeValueMapping.getTypeToValue();
         Field[] fields = instance.getClass().getDeclaredFields();
         for (Field f : fields) {
             String type = f.getType().getName();
@@ -119,18 +111,7 @@ public class Main {
         }
     }
 
-    private static void init() {
-        typeToValue.put("java.lang.String", "aaa");
-        typeToValue.put("java.lang.Integer", 10);
-        typeToValue.put("java.lang.Long", 100l);
-        typeToValue.put("int", 1);
-
-        collectionType.add("java.util.Map");
-        collectionType.add("java.util.List");
-        collectionType.add("java.util.Set");
-    }
-
     private static boolean isCollection(String type) {
-        return collectionType.contains(type);
+        return TypeValueMapping.getCollectionType().contains(type);
     }
 }
