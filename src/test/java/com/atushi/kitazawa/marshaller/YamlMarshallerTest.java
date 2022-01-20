@@ -1,4 +1,4 @@
-package com.atushi.kitazawa;
+package com.atushi.kitazawa.marshaller;
 
 import static org.junit.Assert.assertThat;
 

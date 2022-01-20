@@ -1,4 +1,4 @@
-package com.atushi.kitazawa;
+package com.atushi.kitazawa.marshaller;
 
 public class MarshallerFactory {
     public static Marshaller getMarshaller(String format) {

@@ -1,4 +1,4 @@
-package com.atushi.kitazawa;
+package com.atushi.kitazawa.marshaller;
 
 import java.io.StringWriter;
 
