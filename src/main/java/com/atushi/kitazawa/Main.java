@@ -19,7 +19,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        doMain("JSON");
+        doMain(args[0]);
     }
 
     private static void doMain(String format) {
