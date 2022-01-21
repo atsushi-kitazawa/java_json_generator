@@ -1,9 +1,14 @@
 package com.atushi.kitazawa.marshaller;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.atushi.kitazawa.InstanceFactory;
+import com.atushi.kitazawa.Main;
+import com.atushi.kitazawa.test.clazz.TestClassNoSetter;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -18,7 +23,7 @@ public class YamlMarshallerTest {
         instance.setC(Arrays.asList("list value1", "list value2", "list value3"));
         instance.setD(Arrays.asList(new SubA("AAA"), new SubA("BBB"), new SubA("CCC")));
 
-        String expected = "!!com.atushi.kitazawa.YamlMarshallerTest$A\n" +
+        String expected = "!!com.atushi.kitazawa.marshaller.YamlMarshallerTest$A\n" +
                 "a: string value\n" +
                 "b: 0\n" +
                 "c: [list value1, list value2, list value3]\n" +
@@ -29,6 +34,16 @@ public class YamlMarshallerTest {
         Marshaller m = MarshallerFactory.getMarshaller("YAML");
         String yaml = m.marshal(instance);
         assertThat("", yaml, Matchers.is(expected));
+    }
+
+    @Test
+    public void testNoSetterClass() {
+        Object instance = InstanceFactory.getInstance(TestClassNoSetter.class);
+        Main.setValueToMember(instance);
+        Marshaller m = MarshallerFactory.getMarshaller("YAML");
+        String yaml = m.marshal(instance);
+        System.out.println(yaml);
+        assertTrue(true);
     }
 
     private class A {

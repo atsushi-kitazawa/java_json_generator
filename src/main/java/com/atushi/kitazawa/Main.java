@@ -17,7 +17,7 @@ public class Main {
     }
 
     private static void doMain(String format) {
-        A instance = (A) InstanceFactory.getInstance(A.class);
+        Object instance = InstanceFactory.getInstance(A.class);
         setValueToMember(instance);
         Marshaller m = MarshallerFactory.getMarshaller(format);
         System.out.println(m.marshal(instance));
