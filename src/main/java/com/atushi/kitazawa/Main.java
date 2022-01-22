@@ -13,14 +13,32 @@ import com.atushi.kitazawa.marshaller.MarshallerFactory;
 public class Main {
 
     public static void main(String[] args) {
-        doMain(args[0]);
+        if (args.length != 2) {
+            System.out.println(
+                    "Usage: -cp jgenerator-1.0-SNAPSHOT-jar-with-dependencies.jar <target class> <format(JSON/YAML)>");
+            System.exit(0);
+        }
+
+        String targetClass = args[0];
+        String format = args[1];
+
+        if (!"JSON".equals(format) && !"YAML".equals(format)) {
+            System.err.println("no support format " + format);
+            System.exit(0);
+        }
+
+        doMain(targetClass, format);
     }
 
-    private static void doMain(String format) {
-        Object instance = InstanceFactory.getInstance(A.class);
-        setValueToMember(instance);
-        Marshaller m = MarshallerFactory.getMarshaller(format);
-        System.out.println(m.marshal(instance));
+    private static void doMain(String targetClass, String format) {
+        try {
+            Object instance = InstanceFactory.getInstance(Class.forName(targetClass));
+            setValueToMember(instance);
+            Marshaller m = MarshallerFactory.getMarshaller(format);
+            System.out.println(m.marshal(instance));
+        } catch (ClassNotFoundException e) {
+            System.err.println(String.format("not found %s class.", targetClass));
+        }
     }
 
     public static <T> void setValueToMember(T instance) {
