@@ -3,9 +3,18 @@ package com.atushi.kitazawa;
 import java.util.List;
 
 public class A {
+    String id;
     String a;
     Integer b;
     List<String> c;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getA() {
         return a;

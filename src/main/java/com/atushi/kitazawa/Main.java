@@ -42,7 +42,7 @@ public class Main {
     }
 
     public static <T> void setValueToMember(T instance) {
-        Map<String, Object> typeToValue = TypeValueMapping.getTypeToValue();
+        Map<String, Object> typeToValue = ValueMapping.getTypeToValue();
         Field[] fields = instance.getClass().getDeclaredFields();
         for (Field f : fields) {
             String type = f.getType().getName();
@@ -50,10 +50,10 @@ public class Main {
                 Type[] paramType = ((ParameterizedType) f.getGenericType()).getActualTypeArguments();
                 switch (type) {
                     case "java.util.List":
-                        if (typeToValue.keySet().contains(paramType[0].getTypeName())) {
+                        if (ValueMapping.canMappingType(paramType[0].getTypeName())) {
                             f.setAccessible(true);
                             try {
-                                Object value = typeToValue.get(paramType[0].getTypeName());
+                                Object value = ValueMapping.getValue(f.getName(), paramType[0].getTypeName());
                                 f.set(instance, Arrays.asList(value, value, value));
                             } catch (IllegalAccessException e) {
                                 System.err.println("failed to set " + f.getName());
@@ -72,10 +72,10 @@ public class Main {
                         }
                         break;
                     case "java.util.Set":
-                        if (typeToValue.keySet().contains(paramType[0].getTypeName())) {
+                        if (ValueMapping.canMappingType(paramType[0].getTypeName())) {
                             f.setAccessible(true);
                             try {
-                                Object value = typeToValue.get(paramType[0].getTypeName());
+                                Object value = ValueMapping.getValue(f.getName(), paramType[0].getTypeName());
                                 f.set(instance, new HashSet<>(Arrays.asList(value, value, value)));
                             } catch (IllegalAccessException e) {
                                 System.err.println("failed to set " + f.getName());
@@ -87,7 +87,7 @@ public class Main {
                                 setValueToMember(paramTypeInstance);
                                 f.setAccessible(true);
                                 f.set(instance, new HashSet<>(
-                                        Arrays.asList(paramTypeInstance, paramTypeInstance, paramTypeInstance)));
+                                        Arrays.asList(paramTypeInstance)));
                             } catch (Exception e) {
                                 System.err.println("not declared constructor. " + paramType[0].getClass().getName());
                             }
@@ -96,8 +96,8 @@ public class Main {
                     case "java.util.Map":
                         f.setAccessible(true);
                         try {
-                            Object key = typeToValue.get(paramType[0].getTypeName());
-                            Object value = typeToValue.get(paramType[1].getTypeName());
+                            Object key = ValueMapping.getValue(f.getName(), paramType[0].getTypeName());
+                            Object value = ValueMapping.getValue(f.getName(), paramType[1].getTypeName());
                             f.set(instance, Map.of(key, value));
                         } catch (IllegalAccessException e) {
                             System.err.println("failed to set " + f.getName());
@@ -109,10 +109,11 @@ public class Main {
                 continue;
             }
 
-            if (typeToValue.keySet().contains(type)) {
+            // not collection type.
+            if(ValueMapping.canMappingType(type)) {
                 f.setAccessible(true);
                 try {
-                    f.set(instance, typeToValue.get(type));
+                    f.set(instance, ValueMapping.getValue(f.getName(), type));
                 } catch (IllegalAccessException e) {
                     System.err.println("failed to set " + f.getName());
                 }
@@ -130,6 +131,6 @@ public class Main {
     }
 
     private static boolean isCollection(String type) {
-        return TypeValueMapping.getCollectionType().contains(type);
+        return ValueMapping.getCollectionType().contains(type);
     }
 }

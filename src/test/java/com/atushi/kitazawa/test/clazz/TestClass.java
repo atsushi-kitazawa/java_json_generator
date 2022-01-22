@@ -28,6 +28,9 @@ public class TestClass {
     private List<TestNestClass> nestClassList;
     private Set<TestNestClass> nestClassSet;
 
+    // Field to which the specified value is set
+    private String id;
+
     public int getI() {
         return i;
     }
@@ -130,6 +133,14 @@ public class TestClass {
 
     public void setNestClassSet(Set<TestNestClass> nestClassSet) {
         this.nestClassSet = nestClassSet;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

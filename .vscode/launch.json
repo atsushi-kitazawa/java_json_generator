@@ -16,7 +16,7 @@
             "request": "launch",
             "mainClass": "com.atushi.kitazawa.Main",
             "projectName": "jgenerator",
-            "args": "JSON"
+            "args": "com.atushi.kitazawa.A JSON"
         }
     ]
 }

@@ -36,6 +36,7 @@ public class MainTest
                 assertEquals(Arrays.asList(new TestNestClass("aaa"), new TestNestClass("aaa"),
                                 new TestNestClass("aaa")),
                                 instance.getNestClassList());
+                assertEquals("foobarId", instance.getId());
                 // assertEquals(
                 // new HashSet<>(
                 // Arrays.asList(new TestNestClass("aaa"), new TestNestClass("aaa"),
