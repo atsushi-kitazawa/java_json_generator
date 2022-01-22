@@ -42,7 +42,6 @@ public class Main {
     }
 
     public static <T> void setValueToMember(T instance) {
-        Map<String, Object> typeToValue = ValueMapping.getTypeToValue();
         Field[] fields = instance.getClass().getDeclaredFields();
         for (Field f : fields) {
             String type = f.getType().getName();
@@ -119,12 +118,14 @@ public class Main {
                 }
             } else {
                 try {
-                    Object nestClassInstance = f.getType().getDeclaredConstructor().newInstance();
+                    // Object nestClassInstance = f.getType().getDeclaredConstructor().newInstance();
+                    Object nestClassInstance = InstanceFactory.getInstance(f.getType());
                     setValueToMember(nestClassInstance);
                     f.setAccessible(true);
                     f.set(instance, nestClassInstance);
                 } catch (Exception e) {
                     System.err.println("not declared constructor. " + type);
+                    e.printStackTrace();
                 }
             }
         }

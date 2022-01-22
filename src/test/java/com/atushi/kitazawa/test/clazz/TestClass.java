@@ -1,5 +1,6 @@
 package com.atushi.kitazawa.test.clazz;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,10 +10,14 @@ public class TestClass {
     private int i;
 
     // Object type
+    private Boolean b;
     private String s;
     private Integer intObject;
     private Long longObject;
     private Double doubleObject;
+
+    // Date
+    private Date date;
 
     // Collection
     private List<String> strList;
@@ -141,6 +146,30 @@ public class TestClass {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Boolean getB() {
+        return b;
+    }
+
+    public void setB(Boolean b) {
+        this.b = b;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "TestClass [b=" + b + ", date=" + date + ", doubleObject=" + doubleObject + ", i=" + i + ", id=" + id
+                + ", intList=" + intList + ", intObject=" + intObject + ", intSet=" + intSet + ", longObject="
+                + longObject + ", map=" + map + ", nestClass=" + nestClass + ", nestClassList=" + nestClassList
+                + ", nestClassSet=" + nestClassSet + ", s=" + s + ", strList=" + strList + ", strSet=" + strSet + "]";
     }
 
 }

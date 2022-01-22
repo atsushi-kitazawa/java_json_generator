@@ -3,9 +3,6 @@ package com.atushi.kitazawa.test.clazz;
 public class TestNestClass {
     private String subStr;
 
-    public TestNestClass() {
-    }
-
     public TestNestClass(String s) {
         this.subStr = s;
     }

@@ -1,6 +1,7 @@
 package com.atushi.kitazawa;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -18,10 +19,13 @@ public class ValueMapping {
 
     private static void init() {
         typeToValue.put("java.lang.String", "aaa");
+        typeToValue.put("java.lang.Boolean", false);
         typeToValue.put("java.lang.Integer", 10);
         typeToValue.put("java.lang.Long", 100l);
+        typeToValue.put("java.lang.Double", 1.2345D);
         typeToValue.put("int", 1);
         typeToValue.put("long", 2l);
+        typeToValue.put("java.util.Date", new Date(System.currentTimeMillis()));
 
         fieldToValue.put("id", "foobarId");
 

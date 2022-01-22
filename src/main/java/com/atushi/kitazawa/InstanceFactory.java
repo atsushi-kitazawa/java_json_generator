@@ -12,6 +12,7 @@ import javassist.CtMethod;
 import javassist.CtNewConstructor;
 import javassist.CtNewMethod;
 import javassist.Loader;
+import javassist.NotFoundException;
 
 public class InstanceFactory {
 
@@ -23,7 +24,7 @@ public class InstanceFactory {
             cc.defrost();
 
             // add public default constructor
-            if (!hasDefaultConstructor(clazz)) {
+            if (!hasDefaultConstructor(cc)) {
                 CtConstructor constructor = CtNewConstructor.defaultConstructor(cc);
                 cc.addConstructor(constructor);
             }
@@ -47,9 +48,9 @@ public class InstanceFactory {
         return instance;
     }
 
-    private static boolean hasDefaultConstructor(Class<?> clazz) {
-        Constructor<?>[] constructors = clazz.getDeclaredConstructors();
-        for (Constructor<?> c : constructors) {
+    private static boolean hasDefaultConstructor(CtClass cc) throws NotFoundException {
+        CtConstructor[] constructors = cc.getDeclaredConstructors();
+        for (CtConstructor c : constructors) {
             if (c.getParameterTypes().length == 0) {
                 return true;
             }

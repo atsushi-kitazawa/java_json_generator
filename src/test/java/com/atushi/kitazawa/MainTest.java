@@ -24,6 +24,7 @@ public class MainTest
                 Main.setValueToMember(instance);
 
                 assertEquals(1, instance.getI());
+                assertEquals(Boolean.valueOf(false), instance.getB());
                 assertEquals("aaa", instance.getS());
                 assertEquals(Integer.valueOf(10), instance.getIntObject());
                 assertEquals(Long.valueOf(100l), instance.getLongObject());
@@ -42,6 +43,8 @@ public class MainTest
                 // Arrays.asList(new TestNestClass("aaa"), new TestNestClass("aaa"),
                 // new TestNestClass("aaa"))),
                 // instance.getNestClassSet());
+
+                System.out.println(instance);
         }
 
         @Test
